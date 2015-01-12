@@ -1,0 +1,11 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__. '/../vendor/autoload.php';
+
+use Gajdaw\Console\Application;
+
+define('HELLO_VERSION', '0.1-dev');
+
+$application = new Application(HELLO_VERSION);
+$application->run();
