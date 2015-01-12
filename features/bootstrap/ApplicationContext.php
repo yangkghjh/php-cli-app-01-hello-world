@@ -34,7 +34,7 @@ class ApplicationContext implements Context, SnippetAcceptingContext, MatchersPr
      */
     public function setupApplication()
     {
-        $this->application = new Application('0.1-dev');
+        $this->application = new Application('0.1.0');
         $this->application->setAutoExit(false);
         $this->tester = new ApplicationTester($this->application);
     }
