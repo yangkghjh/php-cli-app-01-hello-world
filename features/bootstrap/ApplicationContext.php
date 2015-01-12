@@ -6,7 +6,7 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 use PhpSpec\Matcher\MatchersProviderInterface;
 use Matcher\ApplicationOutputMatcher;
 
-use Symfony\Component\Console\Application;
+use Gajdaw\Console\Application;
 use Symfony\Component\Console\Tester\ApplicationTester;
 
 /**
