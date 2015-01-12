@@ -1,0 +1,38 @@
+{
+    "name":        "gajdaw/php-cli-app-01-hello-world",
+    "description": "PHP CLI APP example: Hello, world",
+    "keywords":    ["php", "cli", "application", "bdd", "behat", "example"],
+    "homepage":    "http://by-examples.net/",
+    "type":        "library",
+    "license":     "MIT",
+    "authors":     [
+        {
+            "name":     "Włodzimierz Gajda",
+            "email":    "gajdaw@gajdaw.pl",
+            "homepage": "http://gajdaw.pl"
+        }
+    ],
+
+    "require": {
+        "php":             ">=5.3.3",
+        "symfony/console": "~2.6"
+    },
+
+    "require-dev": {
+        "behat/behat": "~3.0",
+        "bossa/phpspec2-expect": "~1.0"
+    },
+
+    "config": {
+        "bin-dir": "bin/"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "Gajdaw": "src/"
+        }
+    },
+
+    "bin": ["bin/hello"]
+
+}
