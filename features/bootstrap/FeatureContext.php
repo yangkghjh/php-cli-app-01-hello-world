@@ -1,5 +1,6 @@
 <?php
 
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Gherkin\Node\PyStringNode;
@@ -19,5 +20,21 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function __construct()
     {
+    }
+
+    /**
+     * @When I run the greet command
+     */
+    public function iRunTheGreetCommand()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then I should see :arg1
+     */
+    public function iShouldSee($arg1)
+    {
+        throw new PendingException();
     }
 }
