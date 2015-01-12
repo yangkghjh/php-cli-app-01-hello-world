@@ -3,23 +3,40 @@
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
-use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
+use PhpSpec\Matcher\MatchersProviderInterface;
+use Matcher\ApplicationOutputMatcher;
+
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Tester\ApplicationTester;
 
 /**
  * Defines application features from the specific context.
  */
-class ApplicationContext implements Context, SnippetAcceptingContext
+class ApplicationContext implements Context, SnippetAcceptingContext, MatchersProviderInterface
 {
     /**
-     * Initializes context.
-     *
-     * Every scenario gets its own context instance.
-     * You can also pass arbitrary arguments to the
-     * context constructor through behat.yml.
+     * @var Application
      */
-    public function __construct()
+    private $application;
+
+    /**
+     * @var integer
+     */
+    private $lastExitCode;
+
+    /**
+     * @var ApplicationTester
+     */
+    private $tester;
+
+    /**
+     * @beforeScenario
+     */
+    public function setupApplication()
     {
+        $this->application = new Application('0.1-dev');
+        $this->application->setAutoExit(false);
+        $this->tester = new ApplicationTester($this->application);
     }
 
     /**
@@ -27,14 +44,30 @@ class ApplicationContext implements Context, SnippetAcceptingContext
      */
     public function iRunTheGreetCommand()
     {
-        throw new PendingException();
+        $arguments = array (
+            'command' => 'greet'
+        );
+
+        $this->lastExitCode = $this->tester->run($arguments, array('interactive' => false));
     }
 
     /**
-     * @Then I should see :arg1
+     * @Then I should see :output
      */
-    public function iShouldSee($arg1)
+    public function iShouldSee($output)
     {
-        throw new PendingException();
+        expect($this->tester)->toHaveOutput((string)$output);
+    }
+
+    /**
+     * Custom matchers
+     *
+     * @return array
+     */
+    public function getMatchers()
+    {
+        return array(
+            new ApplicationOutputMatcher(),
+        );
     }
 }
